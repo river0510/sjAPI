@@ -10,6 +10,8 @@ router.get('/', function(req, res) {
 router.post('/login', login.loginIn);
 router.post('/signup', login.signUp);
 router.post('/modifyPass', login.modifyPass);
+router.get('/getUsers', login.getUsers);
+router.post('/deleteUser', login.delete);
 
 router.post('/upload', upload.imgUpload);
 router.get('/upload', upload.img);

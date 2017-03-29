@@ -101,3 +101,49 @@ exports.modifyPass = function(req, res) {
 		}
 	})
 }
+
+exports.delete = function(req, res) {
+	var id = req.body.id;
+	console.log(id);
+	var data = {};
+	User.remove({
+		'_id': id
+	}, (err) => {
+		if (err) {
+			data.status = 400;
+			data.message = '删除失败，请稍后再试';
+			res.json(data);
+		} else {
+			data.status = 200;
+			data.message = '删除成功';
+			res.json(data);
+		}
+	})
+}
+
+exports.getUsers = function(req, res) {
+	let data = {};
+	User.find((err, user) => {
+		if (err) {
+			data.status = 400;
+			data.message = '服务器错误，请稍后再试';
+			res.json(data);
+		} else {
+			returnData = [];
+			user.forEach((value, index) => {
+				let role = value.role == 0 ? '超级管理员' : '一般管理员';
+				returnData[index] = {
+					key: value._id,
+					userName: value.userName,
+					password: value.password,
+					role: role
+				}
+			})
+			data.users = returnData;
+			data.status = 200;
+			data.message = 'success';
+			console.log(data.users);
+			res.json(data);
+		}
+	})
+}
