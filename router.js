@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
 })
 router.post('/login', login.loginIn);
 router.post('/signup', login.signUp);
+router.post('/modifyPass', login.modifyPass);
 
 router.post('/upload', upload.imgUpload);
 router.get('/upload', upload.img);

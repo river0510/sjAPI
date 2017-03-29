@@ -18,6 +18,11 @@ exports.loginIn = function(req, res) {
 				if (user.password === password) {
 					data.status = 200;
 					data.message = "登陆成功";
+					data.user = {
+						userName: user.userName,
+						role: user.role,
+						id: user._id
+					}
 					console.log(data);
 					res.json(data);
 				} else {
@@ -39,22 +44,26 @@ exports.loginIn = function(req, res) {
 exports.signUp = function(req, res) {
 	var userName = req.body.userName;
 	var password = req.body.password;
+	var role = req.body.role;
+	console.log(userName + ' ' + password + ' ' + role);
 	var data = {};
-	User.find({
+	User.findOne({
 		'userName': userName
 	}, (err, user) => {
+		console.log(user);
 		if (err) {
 			data.status = 400;
 			data.message = "连接失败，请稍后再试";
 			res.json(data);
-		} else if (user.length != 0) {
+		} else if (user) {
 			data.status = 401;
 			data.message = "用户名已存在";
 			res.json(data);
 		} else {
 			var newUser = new User({
 				userName: userName,
-				password: password
+				password: password,
+				role: role
 			});
 			newUser.save((err) => {
 				if (err) {
@@ -67,6 +76,28 @@ exports.signUp = function(req, res) {
 					res.json(data);
 				}
 			})
+		}
+	})
+}
+
+exports.modifyPass = function(req, res) {
+	var id = req.body.id;
+	var password = req.body.password;
+	console.log(id + ' ' + password);
+	var data = {};
+	User.update({
+		'_id': id
+	}, {
+		'password': password
+	}, (err) => {
+		if (err) {
+			data.status = 400;
+			data.message = "修改失败请稍后再试";
+			res.json(data);
+		} else {
+			data.status = 200;
+			data.message = "修改成功，请重新登录";
+			res.json(data);
 		}
 	})
 }
