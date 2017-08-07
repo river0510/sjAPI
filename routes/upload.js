@@ -1,10 +1,14 @@
 var multiparty = require('multiparty');
 var fs = require('fs');
 var config = require('../config');
+var models = require('../models');
+var Carousel = models.carousel;
 
+//type 上传类型 {carousel 轮播图上传  gallery 体验馆上传}
 exports.imgUpload = function(req, res) {
+	var uploadType = req.query.type;
 	var form = new multiparty.Form({
-		uploadDir: './public/files/'
+		uploadDir: './public/' + uploadType + '/'
 	});
 	form.parse(req, function(err, fields, files) {
 		var filesTmp = JSON.stringify(files, null, 2);
