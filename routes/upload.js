@@ -35,6 +35,40 @@ exports.imgUpload = function(req, res) {
 	});
 }
 
+exports.setCarousel = function(req, res) {
+	let carousel = req.body.carousel;
+	carousel = carousel.split(',');
+		console.log(carousel);
+	Carousel.remove({},(err)=>{
+		console.log('remove')
+	});
+	let newCarousel = new Carousel({carousel: carousel});
+	newCarousel.save((err)=>{
+		let data = {};
+		if(err){
+			data.status = 400;
+			data.message = '上传失败'
+		}
+		data.status = 200;
+		data.message = '上传成功'
+
+		res.json(data);
+	})
+}
+
+exports.getCarousel = function(req, res){
+	let data = {};
+	Carousel.findOne({},(err, carousel)=>{
+		if(err){
+			data.status = 400;
+		}
+		data.status = 200;
+		data.carousel =  carousel && carousel.carousel;
+
+		res.json(data);
+	})
+}
+
 exports.img = function(req, res) {
 	res.render('img');
 }

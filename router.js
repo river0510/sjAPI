@@ -16,4 +16,7 @@ router.post('/deleteUser', login.delete);
 router.post('/upload', upload.imgUpload);
 router.get('/upload', upload.img);
 
+router.post('/setCarousel', upload.setCarousel); //后台上传轮播图
+router.get('/getCarousel', upload.getCarousel);  //get轮播图，
+
 module.exports = router;
