@@ -48,9 +48,10 @@ exports.setCarousel = function(req, res) {
 		if(err){
 			data.status = 400;
 			data.message = '上传失败'
+		}else{
+			data.status = 200;
+			data.message = '上传成功'
 		}
-		data.status = 200;
-		data.message = '上传成功'
 
 		res.json(data);
 	})
@@ -61,10 +62,11 @@ exports.getCarousel = function(req, res){
 	Carousel.findOne({},(err, carousel)=>{
 		if(err){
 			data.status = 400;
+		} else{
+			data.status = 200;
+			data.carousel =  carousel && carousel.carousel;
 		}
-		data.status = 200;
-		data.carousel =  carousel && carousel.carousel;
-
+		
 		res.json(data);
 	})
 }
