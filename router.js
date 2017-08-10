@@ -4,6 +4,7 @@ var router = express.Router();
 var login = require('./routes/login');
 var upload = require('./routes/upload');
 var production = require('./routes/production');
+var link = require('./routes/link');
 
 router.get('/', function(req, res) {
 	res.send('<img src="127.0.0.1:8080/files/dmZq9tGX7ndLHv2FPct_jjmv.png">');
@@ -22,5 +23,10 @@ router.get('/getCarousel', upload.getCarousel);  //get轮播图
 
 router.post('/setProduction', production.setProduction)  //上传产品
 router.get('/getProduction', production.getProduction)
+
+router.get('/getLinkData', link.getLinkData)
+router.post('/addLink', link.addLink)
+router.post('/modifyLink', link.modifyLink)
+router.get('/delLink', link.delLink)
 
 module.exports = router;
