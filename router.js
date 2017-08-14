@@ -5,6 +5,7 @@ var login = require('./routes/login');
 var upload = require('./routes/upload');
 var production = require('./routes/production');
 var link = require('./routes/link');
+var gallery = require('./routes/gallery')
 
 router.get('/', function(req, res) {
 	res.send('<img src="127.0.0.1:8080/files/dmZq9tGX7ndLHv2FPct_jjmv.png">');
@@ -28,5 +29,11 @@ router.get('/getLinkData', link.getLinkData)
 router.post('/addLink', link.addLink)
 router.post('/modifyLink', link.modifyLink)
 router.get('/delLink', link.delLink)
+
+router.get('/getGallery', gallery.getGallery)
+router.post('/addGallery', gallery.addGallery)
+router.get('/delGallery', gallery.delGallery)
+router.get('/modifyGallery', gallery.modifyGallery)
+router.post('/addMainStage', gallery.addMainStage)
 
 module.exports = router;

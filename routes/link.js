@@ -17,7 +17,7 @@ exports.getLinkData = function(req, res) {
 			data = {
 				status: 200,
 				message: '数据查询成功',
-				linkData: link.linkData
+				linkData: link && link.linkData
 			}
 		}
 		res.json(data);

@@ -6,8 +6,10 @@ require('./user');
 require('./carousel')
 require('./production')
 require('./link')
+require('./gallery')
 
 exports.user = mongoose.model('user');
 exports.carousel = mongoose.model('carousel');
 exports.production = mongoose.model('production');
 exports.link = mongoose.model('link');
+exports.gallery = mongoose.model('gallery')
