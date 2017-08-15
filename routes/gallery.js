@@ -5,19 +5,17 @@ var models = require('../models');
 var Gallery = models.gallery;
 
 exports.getGallery = function(req, res) {
-	let mainStageId = req.query.mainStageId,
-		subMenuId = req.query.subMenuId;
-	Gallery.find({mainStageId, subMenuId}, (err, gallery)=>{
+	Gallery.find({}, (err, gallery)=>{
 		let data = {};
 		if(err){
 			data = {
 				status: 400
 			}
-			res.json(data);
-		}
-		data = {
-			status: 200,
-			gallery: gallery
+		}else{
+			data = {
+				status: 200,
+				gallery: gallery
+			}
 		}
 		res.json(data);
 	})
